@@ -33,7 +33,19 @@ public class PlayerController : MonoBehaviour
         _movementVertical = Input.GetAxis("Vertical") * speedMultiplier;
         _rigidbody.AddForce(x: _movementHorizontal, y: 0, z: _movementVertical, ForceMode.Acceleration);
     }
+ if (Input.touchCount > 0)
+        {
+            touch = Input.GetTouch(0);
 
+            if (touch.phase == TouchPhase.Moved)
+            {
+                transform.position = new Vector3(
+                    transform.position.x + touch.deltaPosition.x * speedModifier,
+                    transform.position.y,
+                    transform.position.z + touch.deltaPosition.y * speedModifier);
+            }
+
+        }
     private void OnCollisionEnter(Collision other)
     {
     }
